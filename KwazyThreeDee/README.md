@@ -2,7 +2,7 @@ KwazyThreeDee
 =============
 
 KwazyThreeDee (or "quasi-3D") was seen in the Xamarin Evolve 2014 talk
-[https://www.youtube.com/watch?v=79SdhVjBwh0](Xamarin.Forms is Even Cooler than You Think). 
+[Xamarin.Forms is Even Cooler than You Think](https://www.youtube.com/watch?v=79SdhVjBwh0). 
 It demonstrates the use of *BoxView* to mimic vector graphics lines
 in Xamarin.Forms. These lines are arranged and rotated in space using some 3D math. This
 technique mostly works until a sphere is attempted, and then it brings Xamarin.Forms to its knees.
