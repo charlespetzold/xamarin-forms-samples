@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{f769c57e-fce7-4c5b-b7a8-c9da8ef2ac03}" Title="KwazyThreeDee.WinPhone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="KwazyThreeDee.WinPhone author" Description="Sample description" Publisher="KwazyThreeDee.WinPhone" PublisherID="{701ce6d3-2e94-488d-bab2-23789141f019}">
+  <App xmlns="" ProductID="{a957e1b4-a06f-46d7-b407-28051075bea8}" Title="KwazyThreeDee.WinPhone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="KwazyThreeDee.WinPhone author" Description="Sample description" Publisher="KwazyThreeDee.WinPhone" PublisherID="{5de964fc-0486-487c-8ebf-07fedeb62592}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>

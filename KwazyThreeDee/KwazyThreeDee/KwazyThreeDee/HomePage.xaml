@@ -1,38 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-					   x:Class="KwazyThreeDee.HomePage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KwazyThreeDee.HomePage"
              Title="Kwazy 3D"
              x:Name="this">
 
-  <TableView Intent="Menu"
-             BindingContext="{x:Reference this}">
-    <TableView.Root>
-      <TableSection>
-        <TextCell Text="Cube"
-                  Command="{Binding}"
-                  CommandParameter="Forms3D.Cube" />
-        
-        <TextCell Text="Tetrahedron"
-                  Command="{Binding}"
-                  CommandParameter="Forms3D.Tetrahedron" />
+    <TableView Intent="Menu"
+               BindingContext="{x:Reference this}">
+        <TableView.Root>
+            <TableSection Title="Figures">
+                <TextCell Text="Cube"
+                          Command="{Binding}"
+                          CommandParameter="Forms3D.Cube" />
 
-        <TextCell Text="Octahedron"
-                  Command="{Binding}"
-                  CommandParameter="Forms3D.Octahedron" />
+                <TextCell Text="Tetrahedron"
+                          Command="{Binding}"
+                          CommandParameter="Forms3D.Tetrahedron" />
 
-        <TextCell Text="Icosahedron"
-                  Command="{Binding}"
-                  CommandParameter="Forms3D.Icosahedron" />
+                <TextCell Text="Octahedron"
+                          Command="{Binding}"
+                          CommandParameter="Forms3D.Octahedron" />
 
-        <TextCell Text="Dodecahedron"
-                  Command="{Binding}"
-                  CommandParameter="Forms3D.Dodecahedron" />
+                <TextCell Text="Icosahedron"
+                          Command="{Binding}"
+                          CommandParameter="Forms3D.Icosahedron" />
 
-        <TextCell Text="Sphere"
-                  Command="{Binding}"
-                  CommandParameter="Forms3D.Sphere" />
-      </TableSection>
-    </TableView.Root>        
-  </TableView>
+                <TextCell Text="Dodecahedron"
+                          Command="{Binding}"
+                          CommandParameter="Forms3D.Dodecahedron" />
+
+                <TextCell Text="Sphere"
+                          Command="{Binding}"
+                          CommandParameter="Forms3D.Sphere" />
+            </TableSection>
+        </TableView.Root>
+    </TableView>
 </ContentPage>

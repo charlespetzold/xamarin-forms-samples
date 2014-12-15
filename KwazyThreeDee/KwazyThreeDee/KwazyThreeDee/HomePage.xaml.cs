@@ -10,7 +10,6 @@ namespace KwazyThreeDee
         public HomePage()
         {
             InitializeComponent();
-            return;
         }
 
         // Implementation of ICommand interface.

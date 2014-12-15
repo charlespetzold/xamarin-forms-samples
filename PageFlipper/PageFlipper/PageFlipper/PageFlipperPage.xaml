@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PageFlipper.PageFlipperPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="OutlineColor" Value="Black" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BorderWidth">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double"
+                                    iOS="1"
+                                
+                            />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="5, 20, 5, 0"
+                    Android="5, 0"
+                    WinPhone="5, 0" />
+    </ContentPage.Padding>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+                
+        <Grid x:Name="pageGrid"
+              Grid.Column="0"
+              BackgroundColor="Black">
+
+             <Frame>
+                <StackLayout>
+                    <Label Text="Third Page"
+                           HorizontalOptions="Center" />
+                    
+                    <BoxView Color="Black"
+                             HeightRequest="5"
+                             WidthRequest="100"
+                             HorizontalOptions="Center" />
+                    
+                    <Label Text=
+"And this is the final page of the three-page document.
+You can't go forward any more so the button to advance
+to the next page is disabled. But you can click the 
+button to go backwards and start the whole process
+over again." />                    
+                </StackLayout>
+            </Frame>
+
+            <Frame>
+                <StackLayout>
+                    <Label Text="Second Page"
+                           HorizontalOptions="Center" />
+                    
+                    <BoxView Color="Black"
+                             HeightRequest="5"
+                             WidthRequest="100"
+                             HorizontalOptions="Center" />
+                    
+                    <Label Text=
+"This is the second page of a three-page document.
+For this page you can click one button to go forward
+and another button to go back." />                    
+                </StackLayout>
+            </Frame>
+
+            <Frame>
+                <StackLayout>
+                    <Label Text="First Page"
+                           HorizontalOptions="Center" />
+
+                    <BoxView Color="Black"
+                             HeightRequest="5"
+                             WidthRequest="100"
+                             HorizontalOptions="Center" />
+
+                    <Label Text=
+"This is the first page of a three-page document with
+3D-ish page flipping. To go to the next page, click 
+the forward button. The back button is currently disabled
+because you can't go backwards from this page." />
+                </StackLayout>
+            </Frame>
+        </Grid>
+        
+        <StackLayout Grid.Column="1">
+            <Button x:Name="backButton"
+                    Text="&lt;"
+                    VerticalOptions="CenterAndExpand"
+                    IsEnabled="False"
+                    Clicked="OnBackClicked" />
+                
+            <Button x:Name="forwardButton"
+                    Text="&gt;"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="OnForwardClicked" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

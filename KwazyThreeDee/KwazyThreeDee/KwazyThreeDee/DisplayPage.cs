@@ -12,6 +12,8 @@ namespace KwazyThreeDee
 
         public DisplayPage(string strFigureType)
         {
+      //      this.Title = strFigureType.Substring(0, strFigureType.IndexOf('.'));
+
             // Get the PolyhedronBase object specified by the parameter.
             Assembly assembly = typeof(SharedLineMesh).GetTypeInfo().Assembly;
             Type figureType = assembly.GetType(strFigureType);
