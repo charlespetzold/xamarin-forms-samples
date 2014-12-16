@@ -14,6 +14,8 @@ The program runs on iPhone, Android, and Windows Phone.
 On Android, an excessive amount of garbage collection occurs; this impacts the 
 performance, particularly when running under a debugger.
 
+The program is not currently working on the iOS Simulator for inexplicable reasons.
+
 Author
 ------
 

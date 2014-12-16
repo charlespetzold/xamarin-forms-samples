@@ -19,9 +19,7 @@
                 <Setter Property="BorderWidth">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:Double"
-                                    iOS="1"
-                                
-                            />
+                                    iOS="1" />
                     </Setter.Value>
                 </Setter>
             </Style>
@@ -76,7 +74,7 @@ over again." />
                     
                     <Label Text=
 "This is the second page of a three-page document.
-For this page you can click one button to go forward
+From this page you can click one button to go forward
 and another button to go back." />                    
                 </StackLayout>
             </Frame>

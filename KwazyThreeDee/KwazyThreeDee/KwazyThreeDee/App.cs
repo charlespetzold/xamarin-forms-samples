@@ -7,7 +7,7 @@ namespace KwazyThreeDee
     {
         public App()
         {
-            MainPage = new HomePage(); // NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new HomePage());
         }
 
         protected override void OnStart()

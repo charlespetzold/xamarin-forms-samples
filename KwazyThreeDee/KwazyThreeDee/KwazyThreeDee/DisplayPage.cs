@@ -12,7 +12,7 @@ namespace KwazyThreeDee
 
         public DisplayPage(string strFigureType)
         {
-      //      this.Title = strFigureType.Substring(0, strFigureType.IndexOf('.'));
+            this.Title = strFigureType.Substring(strFigureType.IndexOf('.') + 1);
 
             // Get the PolyhedronBase object specified by the parameter.
             Assembly assembly = typeof(SharedLineMesh).GetTypeInfo().Assembly;
