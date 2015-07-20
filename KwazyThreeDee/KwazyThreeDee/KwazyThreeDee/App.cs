@@ -7,9 +7,6 @@ namespace KwazyThreeDee
     {
         public App()
         {
-            // Get reference to library
-            var x = new Forms3D.Matrix4D();
-
             MainPage = new NavigationPage(new HomePage());
         }
 

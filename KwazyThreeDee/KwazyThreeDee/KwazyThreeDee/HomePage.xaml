@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms3d="clr-namespace:Forms3D;assembly=Forms3D"
              x:Class="KwazyThreeDee.HomePage"
              Title="Kwazy 3D"
              x:Name="this">
@@ -11,27 +12,27 @@
             <TableSection Title="Figures">
                 <TextCell Text="Cube"
                           Command="{Binding}"
-                          CommandParameter="Forms3D.Cube" />
+                          CommandParameter="{x:Type forms3d:Cube}" />
 
                 <TextCell Text="Tetrahedron"
                           Command="{Binding}"
-                          CommandParameter="Forms3D.Tetrahedron" />
+                          CommandParameter="{x:Type forms3d:Tetrahedron}" />
 
                 <TextCell Text="Octahedron"
                           Command="{Binding}"
-                          CommandParameter="Forms3D.Octahedron" />
+                          CommandParameter="{x:Type forms3d:Octahedron}" />
 
                 <TextCell Text="Icosahedron"
                           Command="{Binding}"
-                          CommandParameter="Forms3D.Icosahedron" />
+                          CommandParameter="{x:Type forms3d:Icosahedron}" />
 
                 <TextCell Text="Dodecahedron"
                           Command="{Binding}"
-                          CommandParameter="Forms3D.Dodecahedron" />
+                          CommandParameter="{x:Type forms3d:Dodecahedron}" />
 
                 <TextCell Text="Sphere"
                           Command="{Binding}"
-                          CommandParameter="Forms3D.Sphere" />
+                          CommandParameter="{x:Type forms3d:Sphere}" />
             </TableSection>
         </TableView.Root>
     </TableView>

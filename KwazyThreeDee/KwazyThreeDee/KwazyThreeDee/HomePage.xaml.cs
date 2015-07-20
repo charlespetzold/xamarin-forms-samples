@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -22,7 +21,7 @@ namespace KwazyThreeDee
 
         public async void Execute(object parameter)
         {
-            await Navigation.PushAsync(new DisplayPage((string)parameter));
+            await Navigation.PushAsync(new DisplayPage((Type)parameter));
         }
     }
 }

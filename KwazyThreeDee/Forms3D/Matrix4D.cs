@@ -32,41 +32,45 @@ namespace Forms3D
 
         public double M11
         {
+            // Causes paramterless construct creates identify matrix.
+            private set { m11 = value - 1; }
             get { return m11 + 1; }
-            set { m11 = value - 1; }
         }
 
-        public double M12 { set; get; }
-        public double M13 { set; get; }
-        public double M14 { set; get; }
-        public double M21 { set; get; }
+        public double M12 { private set; get; }
+        public double M13 { private set; get; }
+        public double M14 { private set; get; }
+        public double M21 { private set; get; }
 
         public double M22
         {
+            // Causes paramterless construct creates identify matrix.
+            private set { m22 = value - 1; }
             get { return m22 + 1; }
-            set { m22 = value - 1; }
         }
 
-        public double M23 { set; get; }
-        public double M24 { set; get; }
-        public double M31 { set; get; }
-        public double M32 { set; get; }
+        public double M23 { private set; get; }
+        public double M24 { private set; get; }
+        public double M31 { private set; get; }
+        public double M32 { private set; get; }
 
         public double M33
         {
+            // Causes paramterless construct creates identify matrix.
+            private set { m33 = value - 1; }
             get { return m33 + 1; }
-            set { m33 = value - 1; }
         }
 
-        public double M34 { set; get; }
-        public double M41 { set; get; }
-        public double M42 { set; get; }
-        public double M43 { set; get; }
+        public double M34 { private set; get; }
+        public double M41 { private set; get; }
+        public double M42 { private set; get; }
+        public double M43 { private set; get; }
 
         public double M44
         {
+            // Causes paramterless construct creates identify matrix.
+            private set { m44 = value - 1; }
             get { return m44 + 1; }
-            set { m44 = value - 1; }
         }
 
         public static Matrix4D RotationX(double radians)

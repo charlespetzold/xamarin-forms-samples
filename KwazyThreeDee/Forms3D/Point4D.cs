@@ -16,13 +16,13 @@ namespace Forms3D
         {
         }
 
-        public double X { set; get; }
+        public double X { private set; get; }
 
-        public double Y { set; get; }
+        public double Y { private set; get; }
 
-        public double Z { set; get; }
+        public double Z { private set; get; }
 
-        public double W { set; get; }
+        public double W { private set; get; }
 
         public static implicit operator Point3D (Point4D pt)
         {

@@ -17,9 +17,9 @@ namespace Forms3D
         {
         }
 
-        public Point3D Point1 { set; get; }
+        public Point3D Point1 { private set; get; }
 
-        public Point3D Point2 { set; get; }
+        public Point3D Point2 { private set; get; }
 
         public Vector3D Normal1 { set; get; }
 

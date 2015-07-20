@@ -3,6 +3,8 @@ using Xamarin.Forms;
 
 namespace KwazyThreeDee
 {
+    // A BoxView that is actually a line defined by two points and a thickness.
+    // Requires AbsoluteLayout parent.
     class LineView : BoxView
     {
         public static readonly BindableProperty Point1Property =
@@ -57,16 +59,8 @@ namespace KwazyThreeDee
             double rotation = 180 * Math.Atan2(Point2.Y - Point1.Y,
                                                Point2.X - Point1.X) / Math.PI;
 
-            if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.WinPhone)
-            {
-                AbsoluteLayout.SetLayoutBounds(this,
-                  new Rectangle(Point1, new Size(length, Thickness)));
-
-                AnchorX = 0;
-                AnchorY = 0;
-                Rotation = rotation;
-            }
-            else
+            // Avoid using AnchorX and AnchorY on iOS.
+            if (Device.OS == TargetPlatform.iOS)
             {
                 Point midPoint = new Point((Point1.X + Point2.X) / 2,
                                            (Point1.Y + Point2.Y) / 2);
@@ -74,14 +68,16 @@ namespace KwazyThreeDee
                 Point position = new Point(midPoint.X - length / 2, midPoint.Y - Thickness / 2);
 
                 BatchBegin();
-
                 AbsoluteLayout.SetLayoutBounds(this, new Rectangle(position, new Size(length, Thickness)));
-
-                AnchorX = 0.5;
-                AnchorY = 0.5;
                 Rotation = rotation;
-
                 BatchCommit();
+            }
+            else
+            {
+                AbsoluteLayout.SetLayoutBounds(this, new Rectangle(Point1, new Size(length, Thickness)));
+                AnchorX = 0;
+                AnchorY = 0;
+                Rotation = rotation;
             }
         }
     }
