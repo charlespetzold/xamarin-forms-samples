@@ -10,7 +10,7 @@ usually because they demonstrate unorthodox techniques,
 or because they don't work very well,
 or because they push the outside of the envelope to the point where it breaks.
 
-As of July 20, 2015, all samples have been updated to Xamarin.Forms 1.4.3.6376.
+As of August 12, 2015, all samples have been updated to Xamarin.Forms 1.4.4.6392.
 
 The **RotatingSpokes** sample has been removed because it's included in Chapter 22 of *Creating Mobile Apps with Xamarin.Forms*.
 

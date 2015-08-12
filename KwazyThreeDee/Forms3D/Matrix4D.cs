@@ -32,7 +32,7 @@ namespace Forms3D
 
         public double M11
         {
-            // Causes paramterless construct creates identify matrix.
+            // Causes parameterless constructor to create identity matrix.
             private set { m11 = value - 1; }
             get { return m11 + 1; }
         }
@@ -44,7 +44,7 @@ namespace Forms3D
 
         public double M22
         {
-            // Causes paramterless construct creates identify matrix.
+            // Causes parameterless constructor to create identity matrix.
             private set { m22 = value - 1; }
             get { return m22 + 1; }
         }
@@ -56,7 +56,7 @@ namespace Forms3D
 
         public double M33
         {
-            // Causes paramterless construct creates identify matrix.
+            // Causes parameterless constructor to create identity matrix.
             private set { m33 = value - 1; }
             get { return m33 + 1; }
         }
@@ -68,7 +68,7 @@ namespace Forms3D
 
         public double M44
         {
-            // Causes paramterless construct creates identify matrix.
+            // Causes parameterless constructor to create identity matrix.
             private set { m44 = value - 1; }
             get { return m44 + 1; }
         }
