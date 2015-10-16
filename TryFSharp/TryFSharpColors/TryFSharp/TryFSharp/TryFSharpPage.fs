@@ -4,6 +4,7 @@ open System
 open System.Numerics
 open Xamarin.Forms
 open Xamarin.Forms.Xaml
+open Demo.Numerics
 
 type TryFSharpPage() = 
     inherit ContentPage()
@@ -48,7 +49,9 @@ type TryFSharpPage() =
                     | -1 -> Color.Black
                     | _ -> Color.FromHsla(float index / 64.0 % 1.0, 1.0, 0.5)
                 )
-            do progressBar.Progress <- 1.0
+            Device.BeginInvokeOnMainThread(fun _ ->
+                do progressBar.Progress <- 1.0)
+
             return stream
         }
 

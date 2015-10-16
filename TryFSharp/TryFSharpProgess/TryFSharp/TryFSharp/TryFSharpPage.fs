@@ -4,6 +4,7 @@ open System
 open System.Numerics
 open Xamarin.Forms
 open Xamarin.Forms.Xaml
+open Demo.Numerics
 
 type TryFSharpPage() = 
     inherit ContentPage()
@@ -44,7 +45,9 @@ type TryFSharpPage() =
                 let c = Complex(x, y)
                 if IsMandelbrot c 100 then Color.Black else Color.White
                 )
-            do progressBar.Progress <- 1.0
+            Device.BeginInvokeOnMainThread(fun _ ->
+                do progressBar.Progress <- 1.0)
+
             return stream
         }
 

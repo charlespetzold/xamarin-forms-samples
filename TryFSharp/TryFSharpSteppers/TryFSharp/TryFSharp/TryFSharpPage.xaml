@@ -22,7 +22,7 @@
                      Value="7" />
             <Label Text="{Binding Source={x:Reference iterStepper},
                                   Path=Value,
-                                  StringFormat='Zoom = 2 ** {0:F0}'}"
+                                  StringFormat='Iterations = 2 ** {0:F0}'}"
                    FontSize="Large"
                    VerticalOptions="Center" />
         </StackLayout>

@@ -4,6 +4,7 @@ open System
 open System.Numerics
 open Xamarin.Forms
 open Xamarin.Forms.Xaml
+open Demo.Numerics
 
 type TryFSharpPage() = 
     inherit ContentPage()
