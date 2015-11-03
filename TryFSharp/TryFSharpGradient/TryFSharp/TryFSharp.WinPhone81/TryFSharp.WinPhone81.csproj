@@ -120,6 +120,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Core, Version=3.259.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FSharp.Core.4.0.0.1\lib\portable-net45+netcore45+wpa81+wp8\FSharp.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.1.5.1.6471\lib\wpa81\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>

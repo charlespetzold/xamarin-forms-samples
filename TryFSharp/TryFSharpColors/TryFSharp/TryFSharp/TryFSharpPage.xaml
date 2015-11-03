@@ -16,10 +16,5 @@
         <Button Text="Calculate"
                 HorizontalOptions="Center"
                 Clicked="OnCalculateButtonClicked" />
-
-        <Label x:Name="elapsedLabel"
-               Text=" "
-               FontSize="Large"
-               XAlign="Center" />
     </StackLayout>
 </ContentPage>

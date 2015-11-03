@@ -18,9 +18,9 @@ type TryFSharpPage() =
     let width = 2.5
     let height = 2.5
     let ColToX col = center.Real - width / 2.0 + 
-                     float(col) * width / float(cols)
+                        float(col) * width / float(cols)
     let RowToY row = center.Imaginary - height / 2.0 + 
-                     float(row) * height / float(rows)
+                        float(row) * height / float(rows)
 
     let IsMandelbrot c iterations = 
         let mutable z = new Complex()

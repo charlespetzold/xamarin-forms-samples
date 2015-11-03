@@ -24,14 +24,12 @@ type TryFSharpPage() =
                         float(row) * height / float(rows)
 
     let IsMandelbrot c iterations = 
-        let rec RecursiveMandelbrot (z : Complex) countdown =
-            if countdown = 0 then
-                true
-            elif z.Magnitude >= 2.0 then
-                false
-            else
-                RecursiveMandelbrot (z * z + c) (countdown - 1)
-        RecursiveMandelbrot (Complex()) iterations
+        let mutable z = new Complex()
+        let mutable rep = 0
+        while rep < iterations && z.Magnitude < 2.0 do
+            z <- z * z + c
+            rep <- rep + 1
+        rep = iterations
 
     let CalculateAsync() = 
         async {
