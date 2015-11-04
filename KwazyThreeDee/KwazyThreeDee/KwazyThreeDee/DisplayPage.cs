@@ -14,6 +14,8 @@ namespace KwazyThreeDee
         // Argument is SharedLineMesh derivative in Forms3D
         public DisplayPage(Type figureType)
         {
+            Title = figureType.Name;
+
             SharedLineMesh mesh = (SharedLineMesh)Activator.CreateInstance(figureType);
             SharedLine[] sharedLines = mesh.SharedLines.ToArray();
             LineView[] lineViews = new LineView[sharedLines.Length];
