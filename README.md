@@ -10,13 +10,8 @@ usually because they demonstrate unorthodox techniques,
 or because they don't work very well,
 or because they push the outside of the envelope to the point where it breaks.
 
-As of August 12, 2015, all samples have been updated to Xamarin.Forms 1.4.4.6392.
+As of November 19, 2015, all samples have been updated to Xamarin.Forms 1.5.0.6482, and UWP projects have been added.
 
-The **RotatingSpokes** sample has been removed because it's included in Chapter 22 of *Creating Mobile Apps with Xamarin.Forms*.
-
-The **PageFlipper** sample has also been removed because the technique is illustrated in the **SwingingEntrance** sample in Chapter 22 of *Creating Mobile Apps with Xamarin.Forms*.
-
-Which means that the only project left is **KwazyThreeDee**.
 
 
  
