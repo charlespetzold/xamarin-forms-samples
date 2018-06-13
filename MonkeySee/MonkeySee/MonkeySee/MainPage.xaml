@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MonkeySee"
+             x:Class="MonkeySee.MainPage">
+
+    <StackLayout>
+        <StackLayout.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </StackLayout.Resources>
+        
+        
+    	<Label x:Name="quaternion" />
+        
+        <Label x:Name="normalized" />
+
+        <Label x:Name="axis" />
+
+        <Label x:Name="normAxis" />
+
+        <Label x:Name="angle" />
+
+        <Label x:Name="urhoAxis" />
+
+        <Label x:Name="urhoAngle" />
+
+    </StackLayout>
+
+</ContentPage>
