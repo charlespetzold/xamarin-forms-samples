@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SampleMetadata>
+    <ID>19501962-79BF-413F-B6CD-AA891D0E8010</ID>
+    <IsFullApplication>true</IsFullApplication>
+    <Level>Intermediate</Level>
+    <Tags>Xamarin.Forms, Sensors, Animation</Tags>
+    <SupportedPlatforms>Android, iOS, Windows</SupportedPlatforms>
+    <LicenseRequirement>Indie</LicenseRequirement>
+    <Brief>A game for rolling a ball through a maze</Brief>
+    <Gallery>true</Gallery>
+</SampleMetadata>
