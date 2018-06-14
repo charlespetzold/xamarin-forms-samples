@@ -1,7 +1,7 @@
 Monkey See
 =========
 
-**Monkey See** is a program for Xamarin.Forms that uses the cross-platform [`OrientationSensor`](https://docs.microsoft.com/xamarin/essentials/orientationsensor?context=xamarin/xamarin-forms) included in Xamarin.Essentials. 
+**Monkey See** is a program for Xamarin.Forms that uses the cross-platform [`OrientationSensor`](https://docs.microsoft.com/xamarin/essentials/orientation-sensor?context=xamarin/xamarin-forms) included in Xamarin.Essentials. 
 
 **Monkey See** runs on iOS, Android, and the Universal Windows Platform (UWP), but you'll need to run the program on an actual phone or tablet rather than a simulator. The program shows a 3D monkey that you can view from different angles by rotating your phone in 3D space.
 
