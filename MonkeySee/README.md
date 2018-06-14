@@ -7,7 +7,7 @@ Monkey See
 
 The 3D monkey was created by Vic Wang at [http://vidavic.weebly.com](http://vidavic.weebly.com "Vidavic"). It is loaded, displayed, and manipulated using UrhoSharp.
 
-Xamarin.Forms no longer runs on Windows Phone or Windows 10 Mobile devices, but **Tilt Maze** _will_ run on a Windows 10 tablet, such as a Surface Pro, and runs best in Tablet Mode. To run in Tablet Mode, all external monitors must be disconnected from the device. Sweep your finger along the right edge of the screen (or press the Notifications icon to the right of the date and time) to display the **Action Center**. Select **Tablet Mode**. Then run the program.
+Xamarin.Forms no longer runs on Windows Phone or Windows 10 Mobile devices, but **Monkey See** _will_ run on a Windows 10 tablet, such as a Surface Pro, and runs best in Tablet Mode. To run in Tablet Mode, all external monitors must be disconnected from the device. Sweep your finger along the right edge of the screen (or press the Notifications icon to the right of the date and time) to display the **Action Center**. Select **Tablet Mode**. Then run the program.
 
 Here's the program running on iOS, Android, and Windows 10:
 
