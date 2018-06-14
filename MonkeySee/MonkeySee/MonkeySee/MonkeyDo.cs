@@ -36,19 +36,18 @@ namespace MonkeySee
             Scene scene = new Scene();
             Octree octree = scene.CreateComponent<Octree>();
             Zone zone = scene.CreateComponent<Zone>();
-            zone.AmbientColor = new Color(0.6f, 0.6f, 0.6f);
+            zone.AmbientColor = new Color(0.75f, 0.75f, 0.75f);
 
             // Create the root note
             Node rootNode = scene.CreateChild();
             rootNode.Position = new Vector3(0, 0, 0);
 
-            // Create a light node (based on SimpleApplication)
+            // Create a light node
             Node lightNode = rootNode.CreateChild();
-            lightNode.Position = new Vector3(-5, 10, 0);
             Light light = lightNode.CreateComponent<Light>();
-            light.Range = 100;
-            light.Brightness = 0.5f;
-            light.LightType = LightType.Point;
+            light.Color = new Color(0.75f, 0.75f, 0.75f);
+            light.LightType = LightType.Directional;
+            lightNode.SetDirection(new Vector3(2, -3, -1));
 
             // Create the camera
             cameraNode = scene.CreateChild();
@@ -66,6 +65,8 @@ namespace MonkeySee
             AnimatedModel monkey = monkeyNode.CreateComponent<AnimatedModel>();
             monkey.Model = ResourceCache.GetModel("monkey1.mdl");
             monkey.SetMaterial(ResourceCache.GetMaterial("Materials/phong1.xml"));
+
+     //       monkeyNode.GetChild("leg1", true).Rotation = Quaternion.FromAxisAngle(new Vector3(0, 0, 1), 180);
 
             // Move it down a smidge so it's centered on the origin
             monkeyNode.Translate(new Vector3(0, -3, 0));

@@ -30,6 +30,9 @@ namespace MonkeySee
 
             monkeyDo = await urhoSurface.Show<MonkeyDo> (new ApplicationOptions(assetsFolder: "Data"));
 
+            // Sit the monkey upright, just for referene
+            monkeyDo.Orientation = Quaternion.FromAxisAngle(new Vector3(1, 0, 0), 90);
+
             try
             {
                 OrientationSensor.Start(SensorSpeed.Normal);
