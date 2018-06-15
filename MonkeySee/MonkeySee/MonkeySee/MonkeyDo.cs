@@ -5,13 +5,22 @@ namespace MonkeySee
 {
     public class MonkeyDo : Application
     {
+        // For the orientation of the monkey
         Node cameraNode;
         Node monkeyNode;
         Matrix4 cameraTransform;
         Quaternion orientation = Quaternion.Identity;
 
-        // Used for the head rotation
+        // For the rotation of the monkey head
         static readonly Quaternion qSittingUp = Quaternion.FromAxisAngle(new Vector3(1, 0, 0), 90);
+
+        // For the flapping of the monkey arms
+        const float PERIOD = 0.25f;     // seconds
+        const float MAXAMP = 45;        // degrees
+        Quaternion rightArmRotationBase;
+        Quaternion leftArmRotationBase;
+        float amplitude;
+        float phaseAngle = 0;
 
         public MonkeyDo(ApplicationOptions options = null) : base(options)
         {
@@ -41,8 +50,9 @@ namespace MonkeySee
                 float angleBetween = MathHelper.RadiansToDegrees(Vector3.CalculateAngle(monkeyForward, viewForward));
 
                 // Now calculate the swivel angle
-                const float FOLLOW = 30;    // degrees
-                const float IGNORE = 45;
+                const float FOLLOW = 30;    // degrees for head swivel
+                const float IGNORE = 45;    // degrees for head swivel
+                const float MAXAMP = 10;    // degrees for arm flap
 
                 float swivelAngle = 0;
 
@@ -54,9 +64,12 @@ namespace MonkeySee
                 {
                     swivelAngle = FOLLOW / (IGNORE - FOLLOW) * (IGNORE - angleBetween);
                 }
-                else
+                else // angleBetween between 0 and FOLLOW
                 {
                     swivelAngle = angleBetween;
+
+                    // Let's slip in here the amplitude of the arm flapping
+                    amplitude = MAXAMP * (FOLLOW - angleBetween) / FOLLOW;
                 }
 
                 // Calculate the head rotation (FromAxisAngle takes angle in degrees)
@@ -96,21 +109,26 @@ namespace MonkeySee
             cameraNode = scene.CreateChild();
             Camera camera = cameraNode.CreateComponent<Camera>();
 
-            // Set Position and Direction above the monkey pointing down
+            // Set camera Position and Direction above the monkey pointing down
             cameraNode.Position = new Vector3(0, 12, 0);
             cameraNode.SetDirection(new Vector3(0, 0, 0) - cameraNode.Position);
 
-            // Save the camera transform 
+            // Save the camera transform resulting from that configuration
             cameraTransform = From3x4(cameraNode.Transform);
 
-            // Xamarin monkey model created by Vic Wang at [http://vidavic.weebly.com](http://vidavic.weebly.com "Vidavic")
             monkeyNode = rootNode.CreateChild("monkeyNode");
             AnimatedModel monkey = monkeyNode.CreateComponent<AnimatedModel>();
+
+            // Xamarin monkey model created by Vic Wang at http://vidavic.weebly.com
             monkey.Model = ResourceCache.GetModel("monkey1.mdl");
             monkey.SetMaterial(ResourceCache.GetMaterial("Materials/phong1.xml"));
 
             // Move the monkey down a bit so it's centered on the origin
             monkeyNode.Translate(new Vector3(0, -3, 0));
+
+            // Get the initial rotations of the arm bones
+            rightArmRotationBase = monkeyNode.GetChild("arm2", true).Rotation;
+            leftArmRotationBase = monkeyNode.GetChild("arm6", true).Rotation;
 
             // Set up the Viewport
             Viewport viewport = new Viewport(Context, scene, camera, null);
@@ -121,17 +139,32 @@ namespace MonkeySee
         // Matrix conversion methods
         static Matrix3x4 To3x4(Matrix4 m)
         {
-            return new Matrix3x4(m.M11, m.M21, m.M31, m.M41, 
-                                 m.M12, m.M22, m.M32, m.M42, 
+            return new Matrix3x4(m.M11, m.M21, m.M31, m.M41,
+                                 m.M12, m.M22, m.M32, m.M42,
                                  m.M13, m.M23, m.M33, m.M43);
         }
 
         static Matrix4 From3x4(Matrix3x4 m)
         {
-            return new Matrix4(m.m00, m.m10, m.m20, 0, 
+            return new Matrix4(m.m00, m.m10, m.m20, 0,
                                m.m01, m.m11, m.m21, 0,
                                m.m02, m.m12, m.m22, 0,
                                m.m03, m.m13, m.m23, 1);
+        }
+        
+        protected override void OnUpdate(float timeStep)
+        {
+            base.OnUpdate(timeStep);
+
+            // Arm-flapping logic
+            phaseAngle += MathHelper.TwoPi * timeStep / PERIOD;
+            phaseAngle %= MathHelper.TwoPi;
+
+            float angle = amplitude * (float)Math.Sin(phaseAngle);
+            Quaternion rotation = Quaternion.FromAxisAngle(new Vector3(0, 0, 1), angle);
+
+            monkeyNode.GetChild("arm2", true).Rotation = rightArmRotationBase * rotation;
+            monkeyNode.GetChild("arm6", true).Rotation = rightArmRotationBase * rotation;
         }
     }
 }
