@@ -29,39 +29,38 @@ namespace MonkeySee
                                                               Matrix4.CreateFromAxisAngle(axis, -angle));
                 cameraNode.SetTransform(To3x4(rotatedCameraTransform));
 
-                // Now calculate the head swerve
-                Quaternion difference = orientation * Quaternion.Invert(qSittingUp);
+                // Next tackle the head rotation so it tracks the viewer (somewhat)
+                Vector3 monkeyForward = new Vector3(0, 0, -1);
+                Vector3 viewForward = Vector3.TransformVector(monkeyForward, rotatedCameraTransform);
+                Vector3 crossProduct = Vector3.Cross(monkeyForward, viewForward);
 
-                // ToAxisAngle returns angle in radians
-                difference.ToAxisAngle(out axis, out angle);
+                // Swap some components for the difference in head-bone coordinates
+                Vector3 swivelAxis = new Vector3(-crossProduct.Y, 0, crossProduct.X);
+                swivelAxis.Normalize();
 
-                // Empirically, this is always positive
-                angle *= 180 / (float)Math.PI;
+                float angleBetween = MathHelper.RadiansToDegrees(Vector3.CalculateAngle(monkeyForward, viewForward));
 
-                // Swap some components for the difference in coordinates
-                Vector3 swerveAxis = new Vector3(-axis.Z, -axis.Y, axis.X);
-
-                // Now calculate the swerve angle
+                // Now calculate the swivel angle
                 const float FOLLOW = 30;    // degrees
                 const float IGNORE = 45;
 
-                float swerveAngle = 0;
+                float swivelAngle = 0;
 
-                if (angle > IGNORE)
+                if (angleBetween > IGNORE)
                 {
-                    swerveAngle = 0;
+                    swivelAngle = 0;
                 }
-                else if (angle >= FOLLOW)
+                else if (angleBetween >= FOLLOW)
                 {
-                    swerveAngle = FOLLOW / (IGNORE - FOLLOW) * (IGNORE - angle);
+                    swivelAngle = FOLLOW / (IGNORE - FOLLOW) * (IGNORE - angleBetween);
                 }
                 else
                 {
-                    swerveAngle = angle;
+                    swivelAngle = angleBetween;
                 }
 
                 // Calculate the head rotation (FromAxisAngle takes angle in degrees)
-                Quaternion headRotation = Quaternion.FromAxisAngle(swerveAxis, swerveAngle);
+                Quaternion headRotation = Quaternion.FromAxisAngle(swivelAxis, -swivelAngle);
 
                 // Rotate the head
                 monkeyNode.GetChild("head", true).Rotation = headRotation;
