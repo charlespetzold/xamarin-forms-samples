@@ -6,13 +6,13 @@ using Urho.Forms;
 
 namespace MonkeySee
 {
-	public partial class MainPage : ContentPage
-	{
+    public partial class MainPage : ContentPage
+    {
         MonkeyDo monkeyDo;
 
-		public MainPage()
-		{
-			InitializeComponent();
+        public MainPage()
+        {
+            InitializeComponent();
 
             OrientationSensor.ReadingChanged += (args) =>
             {
