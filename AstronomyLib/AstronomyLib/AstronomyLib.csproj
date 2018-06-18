@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\constellations.xml" />
+    <None Remove="Data\VSOP87D.ear" />
+    <None Remove="Data\VSOP87D.jup" />
+    <None Remove="Data\VSOP87D.mar" />
+    <None Remove="Data\VSOP87D.mer" />
+    <None Remove="Data\VSOP87D.nep" />
+    <None Remove="Data\VSOP87D.sat" />
+    <None Remove="Data\VSOP87D.ura" />
+    <None Remove="Data\VSOP87D.ven" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\constellations.xml" />
+    <EmbeddedResource Include="Data\VSOP87D.ear" />
+    <EmbeddedResource Include="Data\VSOP87D.jup" />
+    <EmbeddedResource Include="Data\VSOP87D.mar" />
+    <EmbeddedResource Include="Data\VSOP87D.mer" />
+    <EmbeddedResource Include="Data\VSOP87D.nep" />
+    <EmbeddedResource Include="Data\VSOP87D.sat" />
+    <EmbeddedResource Include="Data\VSOP87D.ura" />
+    <EmbeddedResource Include="Data\VSOP87D.ven" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
