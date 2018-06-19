@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="EarthlyDelights.MainPage">
+
+    <skia:SKCanvasView x:Name="canvasView"
+                       PaintSurface="OnCanvasViewPaintSurface" />
+
+        <!-- Image Source="http://upload.wikimedia.org/wikipedia/commons/6/62/The_Garden_of_Earthly_Delights_by_Bosch_High_Resolution_2.jpg"
+               
+               WidthRequest="7000"
+               HeightRequest="5000"
+               
+               />-->
+
+
+        <!--<Image Source="https://upload.wikimedia.org/wikipedia/commons/7/7e/Pieter_Brueghel_the_Elder_-_The_Dutch_Proverbs_-_Google_Art_Project.jpg" />-->
+
+    <!--<Image Source="http://developer.xamarin.com/demo/IMG_3256.JPG" />-->
+    <!--</AbsoluteLayout>-->
+
+    <!--<Image Source="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/El_jard%C3%ADn_de_las_Delicias%2C_de_El_Bosco.jpg/1024px-El_jard%C3%ADn_de_las_Delicias%2C_de_El_Bosco.jpg" />-->
+
+
+
+</ContentPage>
