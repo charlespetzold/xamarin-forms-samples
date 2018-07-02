@@ -19,6 +19,8 @@ namespace MonkeySee
         const float MAXAMP = 45;        // degrees
         Quaternion rightArmRotationBase;
         Quaternion leftArmRotationBase;
+        Quaternion rightLegRotationBase;
+        Quaternion leftLegRotationBase;
         float amplitude;
         float phaseAngle = 0;
 
@@ -130,6 +132,10 @@ namespace MonkeySee
             rightArmRotationBase = monkeyNode.GetChild("arm2", true).Rotation;
             leftArmRotationBase = monkeyNode.GetChild("arm6", true).Rotation;
 
+            // And the leg bones
+            rightLegRotationBase = monkeyNode.GetChild("leg1", true).Rotation;
+            leftLegRotationBase = monkeyNode.GetChild("leg5", true).Rotation;
+
             // Set up the Viewport
             Viewport viewport = new Viewport(Context, scene, camera, null);
             Renderer.SetViewport(0, viewport);
@@ -164,7 +170,15 @@ namespace MonkeySee
             Quaternion rotation = Quaternion.FromAxisAngle(new Vector3(0, 0, 1), angle);
 
             monkeyNode.GetChild("arm2", true).Rotation = rightArmRotationBase * rotation;
-            monkeyNode.GetChild("arm6", true).Rotation = rightArmRotationBase * rotation;
+            monkeyNode.GetChild("arm6", true).Rotation = leftArmRotationBase * rotation;
+
+            // Hack existing values a bit for the legs
+            angle = 1.5f * amplitude * (float)Math.Sin(phaseAngle + MathHelper.PiOver2);
+            rotation = Quaternion.FromAxisAngle(new Vector3(0, 0, 1), angle);
+            monkeyNode.GetChild("leg1", true).Rotation = rightLegRotationBase * rotation;
+
+            rotation = Quaternion.FromAxisAngle(new Vector3(0, 0, 1), -angle);
+            monkeyNode.GetChild("leg5", true).Rotation = leftLegRotationBase * rotation;
         }
     }
 }
