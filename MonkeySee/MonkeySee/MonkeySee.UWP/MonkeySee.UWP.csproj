@@ -153,9 +153,9 @@
       <Version>1.8.93</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>0.7.0.17-preview</Version>
+      <Version>0.10.0-preview</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>

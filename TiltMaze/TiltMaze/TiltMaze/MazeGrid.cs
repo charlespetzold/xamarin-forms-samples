@@ -27,7 +27,9 @@ namespace TiltMaze
         }
 
         public int Width { protected set; get; }
+
         public int Height { protected set; get; }
+
         public MazeCell[,] Cells { protected set; get; }
 
         void DivideChamber(MazeChamber chamber)

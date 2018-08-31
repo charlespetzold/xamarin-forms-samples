@@ -21,7 +21,7 @@ namespace MonkeySee
         Quaternion leftArmRotationBase;
         Quaternion rightLegRotationBase;
         Quaternion leftLegRotationBase;
-        float amplitude;
+        float amplitude = 0;
         float phaseAngle = 0;
 
         public MonkeyDo(ApplicationOptions options = null) : base(options)
@@ -57,10 +57,11 @@ namespace MonkeySee
                 const float MAXAMP = 10;    // degrees for arm flap
 
                 float swivelAngle = 0;
+                amplitude = 0;
 
                 if (angleBetween > IGNORE)
                 {
-                    swivelAngle = 0;
+                    // swivelAngle and amplitude set as above
                 }
                 else if (angleBetween >= FOLLOW)
                 {

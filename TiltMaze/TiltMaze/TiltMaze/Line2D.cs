@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace TiltMaze
 {
-    // Represents line as pt1 + t(pt2 - pt1)
+    // Represents line as pt1 + t·(pt2 - pt1)
     public struct Line2D
     {
         public Line2D(Vector2 pt1, Vector2 pt2) : this()
@@ -16,8 +16,11 @@ namespace TiltMaze
         }
 
         public Vector2 Point1 { private set; get; }
+
         public Vector2 Point2 { private set; get; }
+
         public Vector2 Vector { private set; get; }
+
         public Vector2 Normal { private set; get; }
 
         public float Angle

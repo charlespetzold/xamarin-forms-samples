@@ -2,12 +2,11 @@
 
 namespace TiltMaze
 {
-    internal class MazeChamber
+    class MazeChamber
     {
         static Random rand = new Random();
 
         public MazeChamber(int x, int y, int width, int height)
-            : base()
         {
             X = x;
             Y = y;
@@ -16,11 +15,15 @@ namespace TiltMaze
         }
 
         public int X { protected set; get; }
+
         public int Y { protected set; get; }
+
         public int Width { protected set; get; }
+
         public int Height { protected set; get; }
 
         public MazeChamber Chamber1 { protected set; get; }
+
         public MazeChamber Chamber2 { protected set; get; }
 
         public int Divide(bool divideWidth)

@@ -42,7 +42,7 @@ namespace TiltMaze
 		{
 			InitializeComponent();
 
-            Accelerometer.ReadingChanged += (args) =>
+            Accelerometer.ReadingChanged += (sender, args) =>
             {
                 // Smooth the reading by averaging with prior values
                 acceleration = 0.5f * args.Reading.Acceleration + 0.5f * acceleration;
@@ -258,59 +258,157 @@ namespace TiltMaze
 
         bool MoveBall(float deltaSeconds)
         {
-            // Save the position just in case the velocity drops to zero
-            Vector2 savedBallPosition = ballPosition;
+            // Convert to standard notation for ease of manipulation
+            float t = deltaSeconds;
+            Vector2 r0 = ballPosition;
+            Vector2 r = new Vector2();
+            Vector2 v0 = ballVelocity;
+            Vector2 v = new Vector2();
+            Vector2 a = GRAVITY * new Vector2(-acceleration.X, acceleration.Y);
 
-            // Get acceleration, do the physics
-            Vector2 acceleration2D = new Vector2(-acceleration.X, acceleration.Y);
-            ballVelocity += GRAVITY * acceleration2D * deltaSeconds;
-            Vector2 oldPosition = ballPosition;
-            ballPosition += ballVelocity * deltaSeconds;
-
-            // Loop through possible bounces
-            bool needAnotherLoop = false;
-
-            do
+            while (t > 0)
             {
-                needAnotherLoop = false;
+                // Here's the basic physics
+                r = r0 + v0 * t + 0.5f * a * t * t;
+                v = v0 + a * t;
+
+                // Set to real Line2D values if the ball is rolling on a horizontal or vertical edge.
+                // If both are set, the ball is not moving in a corner.
+                Line2D horzRollLine = new Line2D();
+                Line2D vertRollLine = new Line2D();
+
+                // Check for a rolling ball.
+                // It's considered rolling if it's within 0.1 pixels of an edge.
+                // It's set at a distance of 0.01 pixels away to avoid getting snagged by line.
+                foreach (Line2D line in borders)
+                {
+                    Line2D shiftedLine = line.ShiftOut(BALL_RADIUS * line.Normal);
+                    Vector2 pt1 = shiftedLine.Point1;
+                    Vector2 pt2 = shiftedLine.Point2;
+                    Vector2 normal = shiftedLine.Normal;
+
+                    // Rolling on horizontal edge?
+                    if (normal.X == 0 && r0.X > Math.Min(pt1.X, pt2.X) &&
+                                         r0.X < Math.Max(pt1.X, pt2.X))
+                    {
+                        float y = pt1.Y;
+
+                        // Rolling on bottom edge?
+                        if (normal.Y > 0 && Math.Abs(r0.Y - y) < 0.1f && r.Y < y)
+                        {
+                            r.Y = y + 0.01f;
+                            v.Y = 0;
+                            horzRollLine = line;
+                        }
+                        // Rolling on top edge?
+                        else if (normal.Y < 0 && Math.Abs(y - r0.Y) < 0.1f && r.Y > y)
+                        {
+                            r.Y = y - 0.01f;
+                            v.Y = 0;
+                            horzRollLine = line;
+                        }
+                    }
+                    // Rolling on vertical edge? 
+                    else if (normal.Y == 0 && r0.Y > Math.Min(pt1.Y, pt2.Y) &&
+                                              r0.Y < Math.Max(pt1.Y, pt2.Y))
+                    {
+
+                        float x = pt1.X;
+
+                        // Rolling on right side?
+                        if (normal.X > 0 && Math.Abs(r0.X - x) < 0.1f && r.X < x)
+                        {
+                            r.X = x + 0.01f;
+                            v.X = 0;
+                            vertRollLine = line;
+                        }
+                        // Rolling on left side?
+                        else if (normal.X < 0 && Math.Abs(x - r0.X) < 0.1f && r.X > x)
+                        {
+                            r.X = x - 0.01f;
+                            v.X = 0;
+                            vertRollLine = line;
+                        }
+                    }
+                }
+
+                // Set to the information for the minimum distance
+                float distanceToCollision = float.MaxValue;
+                Line2D collisionLine = new Line2D();
+                Vector2 collisionPoint = new Vector2();
 
                 foreach (Line2D line in borders)
                 {
+                    // Skip the Line2D objects that the ball is rolling along
+                    if (line.Equals(horzRollLine) || line.Equals(vertRollLine))
+                    {
+                        continue;
+                    }
+
                     // Check if ball has crossed a line of the wall
                     Line2D shiftedLine = line.ShiftOut(BALL_RADIUS * line.Normal);
-                    Line2D ballTrajectory = new Line2D(oldPosition, ballPosition);
+                    Line2D ballTrajectory = new Line2D(r0, r);
                     Vector2 intersection = shiftedLine.SegmentIntersection(ballTrajectory);
                     float angleDiff = WrapAngle(line.Angle - ballTrajectory.Angle);
 
-                    if (Line2D.IsValid(intersection) &&
-                        angleDiff > 0 &&
-                        Line2D.IsValid(Vector2.Normalize(ballVelocity)))
+                    // If so, save the one with the shortest distance, same as shortest time
+                    if (Line2D.IsValid(intersection) && angleDiff > 0)
                     {
-                        float beyond = (ballPosition - intersection).Length();
-                        ballVelocity = BOUNCE * Vector2.Reflect(ballVelocity, line.Normal);
+                        float distance = (intersection - r0).Length();
 
-                        // Check if the magnitude of the ball velocity is zero
-                        if (ballVelocity.Length() == 0)
+                        // If it's less distance than the previous ones, save that info
+                        if (distance < distanceToCollision)
                         {
-                            // Just get out of here; danger lurks otherwise
-                            ballPosition = savedBallPosition;
-                            break;
+                            distanceToCollision = distance;
+                            collisionLine = line;
+                            collisionPoint = intersection;
                         }
+                    }
+                }
 
-                        // Set new ball position ofter bounce
-                        ballPosition = intersection + beyond * Vector2.Normalize(ballVelocity);
+                // If there's is a bounce, here's where it's handled
+                if (distanceToCollision < float.MaxValue)
+                {
+                    if (distanceToCollision < 0.1f)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Unexpected distanceToCCollision < 0.1f");
+          //              break;
+                    }
 
-                        // But the bounce might put it beyond another border line
-                        needAnotherLoop = true;
+                    // The velocity magnitude at the collision point
+                    float vMag = (float)Math.Sqrt(v0.LengthSquared() + 2 * a.Length() * distanceToCollision);
+
+                    // New velocity vector
+                    v = vMag * Vector2.Normalize(v0);
+
+                    // The time until collision
+                    float tCollision = (vMag - v0.Length()) / a.Length();
+
+                    // Set up for next iteration
+                    t -= tCollision;
+                    r0 = collisionPoint;
+                    v0 = BOUNCE * Vector2.Reflect(v, collisionLine.Normal);
+
+                    if (tCollision == 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Unexpected tCollision == 0");
                         break;
                     }
                 }
+                // Otherwise, there's no bounce, so stop the iterations
+                else
+                {
+                    t = 0;
+                }
             }
-            while (needAnotherLoop);
+            
+            // New ball position and velocity
+            ballPosition = r;
+            ballVelocity = v;
 
             // Position the ball at ballPosition
-            Rectangle ballRect = new Rectangle(ballPosition.X - BALL_RADIUS, 
-                                               ballPosition.Y - BALL_RADIUS, 
+            Rectangle ballRect = new Rectangle(ballPosition.X - BALL_RADIUS,
+                                               ballPosition.Y - BALL_RADIUS,
                                                AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize);
 
             AbsoluteLayout.SetLayoutBounds(ball, ballRect);

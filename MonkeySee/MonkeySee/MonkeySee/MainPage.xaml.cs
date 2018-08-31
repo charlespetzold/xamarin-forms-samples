@@ -14,7 +14,7 @@ namespace MonkeySee
         {
             InitializeComponent();
 
-            OrientationSensor.ReadingChanged += (args) =>
+            OrientationSensor.ReadingChanged += (sender, args) =>
             {
                 System.Numerics.Quaternion q = args.Reading.Orientation;
 
